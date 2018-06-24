@@ -24,3 +24,7 @@ C:\Users\josea\source\repos\ToweDefense\ToweDefense\obj\x86\Debug\ToweDefense.cs
 C:\Users\josea\source\repos\ToweDefense\ToweDefense\obj\x86\Debug\ToweDefense.csproj.CopyComplete
 C:\Users\josea\source\repos\ToweDefense\ToweDefense\obj\x86\Debug\ToweDefense.exe
 C:\Users\josea\source\repos\ToweDefense\ToweDefense\obj\x86\Debug\ToweDefense.pdb
+C:\Users\josea\source\repos\ToweDefense\ToweDefense\bin\Windows\x86\Debug\Content\selectionTile.xnb
+C:\Users\josea\source\repos\ToweDefense\ToweDefense\bin\Windows\x86\Debug\Content\cursor.xnb
+C:\Users\josea\source\repos\ToweDefense\ToweDefense\bin\Windows\x86\Debug\Content\Mapa\DarkGrass.xnb
+C:\Users\josea\source\repos\ToweDefense\ToweDefense\bin\Windows\x86\Debug\Content\Mapa\Terrain.xnb

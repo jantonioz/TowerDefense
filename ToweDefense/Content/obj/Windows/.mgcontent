@@ -5,5 +5,9 @@
   <Config />
   <SourceFiles>
     <File>C:/Users/josea/source/repos/ToweDefense/ToweDefense/Content/Tile.png</File>
+    <File>C:/Users/josea/source/repos/ToweDefense/ToweDefense/Content/selectionTile.png</File>
+    <File>C:/Users/josea/source/repos/ToweDefense/ToweDefense/Content/cursor.png</File>
+    <File>C:/Users/josea/source/repos/ToweDefense/ToweDefense/Content/Mapa/DarkGrass.png</File>
+    <File>C:/Users/josea/source/repos/ToweDefense/ToweDefense/Content/Mapa/Terrain.png</File>
   </SourceFiles>
 </SourceFileCollection>

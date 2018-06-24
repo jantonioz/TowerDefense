@@ -14,7 +14,16 @@ namespace ToweDefense
 
         Vector2 screenSize = Vector2.Zero;
 
-        Texture2D tile;
+        Texture2D tile, selectionTile, cursor;
+        Vector2 position = Vector2.Zero, mousePos;
+
+        float scale_x = 0;
+        float scale_y = 0;
+        float resolutionScale = 0;
+
+        Camera camera;
+
+        Mapa m;
 
         public Game1()
         {
@@ -28,10 +37,15 @@ namespace ToweDefense
                     graphics.PreferredBackBufferWidth,
                     graphics.PreferredBackBufferHeight
                 );
+            //this.IsMouseVisible = true;
 
-
+            scale_x = 1 * (  screenSize.X / GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width );
+            scale_y = 1 * (  screenSize.Y / GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height );
+            resolutionScale = scale_x;
             // redimenciona los pixeles 
             graphics.IsFullScreen = true;
+
+            
         }
 
         /// <summary>
@@ -43,7 +57,7 @@ namespace ToweDefense
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            camera = new Camera(GraphicsDevice.Viewport);
             base.Initialize();
         }
 
@@ -59,6 +73,8 @@ namespace ToweDefense
             // TODO: use this.Content to load your game content here
 
             tile = Content.Load<Texture2D>("Tile");
+            selectionTile = Content.Load<Texture2D>("selectionTile");
+            cursor = Content.Load<Texture2D>("cursor");
         }
 
         /// <summary>
@@ -68,6 +84,7 @@ namespace ToweDefense
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
+            camera = null;
         }
 
         /// <summary>
@@ -81,6 +98,18 @@ namespace ToweDefense
                 Exit();
 
             // TODO: Add your update logic here
+            
+            camera.UpdateCamera(graphics.GraphicsDevice.Viewport);
+            MouseState ms = Mouse.GetState();
+            mousePos = new Vector2(ms.X * scale_x, ms.Y * scale_y);
+
+            int x = (int)(mousePos.X / 100);
+            x *= 100;
+            int y = (int)(mousePos.Y / 100);
+            y *= 100;
+
+            position = new Vector2(x, y);
+
 
             base.Update(gameTime);
         }
@@ -95,15 +124,20 @@ namespace ToweDefense
 
             // TODO: Add your drawing code here
 
-            spriteBatch.Begin();
 
-            for (int i = 0; i < screenSize.X; i+=100)
+            spriteBatch.Begin(transformMatrix: camera.Transform);
+
+            spriteBatch.Draw(selectionTile, position, Color.White);
+            for (int i = 0; i < screenSize.X; i += 100)
             {
-                for (int j = 0; j < screenSize.Y; j+=100)
+                for (int j = 0; j < screenSize.Y; j += 100)
                 {
                     spriteBatch.Draw(tile, new Vector2(i, j), Color.White);
                 }
             }
+
+
+            spriteBatch.Draw(cursor, mousePos, Color.White);
 
             spriteBatch.End();
 
