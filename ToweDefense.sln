@@ -5,16 +5,30 @@ VisualStudioVersion = 15.0.27703.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToweDefense", "ToweDefense\ToweDefense.csproj", "{1614FED9-4872-490D-8565-DC210A7F5150}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapEditorWinform", "MapEditorWinform\MapEditorWinform.csproj", "{1D7FA707-9245-4E18-85A4-C9E980E22E26}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
 		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1614FED9-4872-490D-8565-DC210A7F5150}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{1614FED9-4872-490D-8565-DC210A7F5150}.Debug|x86.ActiveCfg = Debug|x86
 		{1614FED9-4872-490D-8565-DC210A7F5150}.Debug|x86.Build.0 = Debug|x86
+		{1614FED9-4872-490D-8565-DC210A7F5150}.Release|Any CPU.ActiveCfg = Release|x86
 		{1614FED9-4872-490D-8565-DC210A7F5150}.Release|x86.ActiveCfg = Release|x86
 		{1614FED9-4872-490D-8565-DC210A7F5150}.Release|x86.Build.0 = Release|x86
+		{1D7FA707-9245-4E18-85A4-C9E980E22E26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D7FA707-9245-4E18-85A4-C9E980E22E26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D7FA707-9245-4E18-85A4-C9E980E22E26}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1D7FA707-9245-4E18-85A4-C9E980E22E26}.Debug|x86.Build.0 = Debug|Any CPU
+		{1D7FA707-9245-4E18-85A4-C9E980E22E26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D7FA707-9245-4E18-85A4-C9E980E22E26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D7FA707-9245-4E18-85A4-C9E980E22E26}.Release|x86.ActiveCfg = Release|Any CPU
+		{1D7FA707-9245-4E18-85A4-C9E980E22E26}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

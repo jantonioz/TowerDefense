@@ -37,7 +37,7 @@ namespace ToweDefense
                     graphics.PreferredBackBufferWidth,
                     graphics.PreferredBackBufferHeight
                 );
-            //this.IsMouseVisible = true;
+            this.IsMouseVisible = false;
 
             scale_x = 1 * (  screenSize.X / GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width );
             scale_y = 1 * (  screenSize.Y / GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height );
