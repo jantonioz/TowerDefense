@@ -11,5 +11,7 @@
     <File>C:/Users/josea/source/repos/ToweDefense/ToweDefense/Content/Mapa/Terrain.png</File>
     <File>C:/Users/josea/source/repos/ToweDefense/ToweDefense/Content/Mapa/MapEditorEnd.png</File>
     <File>C:/Users/josea/source/repos/ToweDefense/ToweDefense/Content/Mapa/MapEditorStart.png</File>
+    <File>C:/Users/josea/source/repos/ToweDefense/ToweDefense/Content/Enemy/EnemiTest.png</File>
+    <File>C:/Users/josea/source/repos/ToweDefense/ToweDefense/Content/Enemy/lifeBar.png</File>
   </SourceFiles>
 </SourceFileCollection>

@@ -15,14 +15,20 @@ namespace MapEditorWinform.Utils
         public int textureID;
         public string identifier;
 
-        public Tile(Vector2 positionGrid, Texture2D texture, int textureID)
+        
+
+        public Tile(Vector2 positionGrid, Texture2D texture, int textureID, string identifier = "Default")
         {
             this.positionGrid = positionGrid;
             this.position = new Vector2(positionGrid.X * 100, positionGrid.Y * 100);
             this.textura = texture;
             this.textureID = textureID;
-            this.identifier = "Default";
-            //this.identifier = identifier;
+            this.identifier = identifier;
+        }
+
+        public bool isTerrain()
+        {
+            return (identifier.ToLower().Contains("terrain") ? true : false);
         }
 
         public void Draw(SpriteBatch sp)

@@ -27,3 +27,12 @@ C:\Users\josea\source\repos\ToweDefense\MapEditorWinform\obj\Debug\MapEditorWinf
 C:\Users\josea\source\repos\ToweDefense\MapEditorWinform\obj\Debug\MapEditorWinform.exe
 C:\Users\josea\source\repos\ToweDefense\MapEditorWinform\obj\Debug\MapEditorWinform.pdb
 C:\Users\josea\source\repos\ToweDefense\MapEditorWinform\obj\Debug\MapEditorWinform.Form1.resources
+C:\Users\josea\source\repos\ToweDefense\MapEditorWinform\bin\Debug\Content\cursor.xnb
+C:\Users\josea\source\repos\ToweDefense\MapEditorWinform\bin\Debug\Content\DarkGrass.xnb
+C:\Users\josea\source\repos\ToweDefense\MapEditorWinform\bin\Debug\Content\EnemiTest.xnb
+C:\Users\josea\source\repos\ToweDefense\MapEditorWinform\bin\Debug\Content\lifeBar.xnb
+C:\Users\josea\source\repos\ToweDefense\MapEditorWinform\bin\Debug\Content\MapEditorEnd.xnb
+C:\Users\josea\source\repos\ToweDefense\MapEditorWinform\bin\Debug\Content\MapEditorStart.xnb
+C:\Users\josea\source\repos\ToweDefense\MapEditorWinform\bin\Debug\Content\selectionTile.xnb
+C:\Users\josea\source\repos\ToweDefense\MapEditorWinform\bin\Debug\Content\Terrain.xnb
+C:\Users\josea\source\repos\ToweDefense\MapEditorWinform\bin\Debug\Content\Tile.xnb

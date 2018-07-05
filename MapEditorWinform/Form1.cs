@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,7 @@ namespace MapEditorWinform
         public Form1()
         {
             InitializeComponent();
+            openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -89,6 +91,34 @@ namespace MapEditorWinform
                 txtStartMap.Text = $"{drawTest1.map.CurrentCol}, {drawTest1.map.CurrentRow}";
             if (drawTest1.map.SelectedType == 4)
                 txtEndMap.Text = $"{drawTest1.map.CurrentCol}, {drawTest1.map.CurrentRow}";
+        }
+
+        private void guardarToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            drawTest1.map.WriteToFile();
+        }
+
+        private void guardarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Show the dialog and get result.
+            DialogResult result = openFileDialog1.ShowDialog();
+            if (result == DialogResult.OK) // Test result.
+            {
+
+                MessageBox.Show(openFileDialog1.FileName);
+                drawTest1.map.ReadFile(openFileDialog1.FileName);
+
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            drawTest1.gameState = 1;
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            drawTest1.gameState = 0;
         }
     }
 }

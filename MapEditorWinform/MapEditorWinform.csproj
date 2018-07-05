@@ -63,6 +63,7 @@
     <Compile Include="DrawTest.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Enemies\Enemy.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -73,6 +74,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\Camera.cs" />
     <Compile Include="Utils\MapManager.cs" />
+    <Compile Include="Utils\Calculus.cs" />
+    <Compile Include="Utils\Path.cs" />
     <Compile Include="Utils\Tile.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -86,13 +89,33 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="Content\cursor.xnb" />
-    <None Include="Content\DarkGrass.xnb" />
-    <None Include="Content\MapEditorEnd.xnb" />
-    <None Include="Content\MapEditorStart.xnb" />
-    <None Include="Content\selectionTile.xnb" />
-    <None Include="Content\Terrain.xnb" />
-    <None Include="Content\Tile.xnb" />
+    <EmbeddedResource Include="Content\cursor.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Content\DarkGrass.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Content\EnemiTest.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Content\lifeBar.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Content\MapEditorEnd.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Content\MapEditorStart.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Content\selectionTile.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Content\Terrain.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Content\Tile.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
