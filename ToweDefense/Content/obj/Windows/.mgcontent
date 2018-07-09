@@ -13,5 +13,8 @@
     <File>C:/Users/josea/source/repos/ToweDefense/ToweDefense/Content/Mapa/MapEditorStart.png</File>
     <File>C:/Users/josea/source/repos/ToweDefense/ToweDefense/Content/Enemy/EnemiTest.png</File>
     <File>C:/Users/josea/source/repos/ToweDefense/ToweDefense/Content/Enemy/lifeBar.png</File>
+    <File>C:/Users/josea/source/repos/ToweDefense/ToweDefense/Content/Turret/TowerBase.png</File>
+    <File>C:/Users/josea/source/repos/ToweDefense/ToweDefense/Content/Turret/towerBullet.png</File>
+    <File>C:/Users/josea/source/repos/ToweDefense/ToweDefense/Content/Turret/TowerCanon.png</File>
   </SourceFiles>
 </SourceFileCollection>

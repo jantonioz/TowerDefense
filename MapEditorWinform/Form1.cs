@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MapEditorWinform.Utils;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -44,7 +45,7 @@ namespace MapEditorWinform
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            listBox1.SelectedIndex = 0;
+            listBox1.SelectedIndex = TypeSelection.VOID;
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -71,7 +72,7 @@ namespace MapEditorWinform
 
         private void button4_Click(object sender, EventArgs e)
         {
-            drawTest1.map.SelectedType = 3;
+            drawTest1.map.SelectedType = TypeSelection.START;
         }
 
         private void drawTest1_MouseLeave(object sender, EventArgs e)
@@ -82,14 +83,14 @@ namespace MapEditorWinform
 
         private void button5_Click(object sender, EventArgs e)
         {
-            drawTest1.map.SelectedType = 4;
+            drawTest1.map.SelectedType = TypeSelection.END;
         }
 
         private void drawTest1_Click(object sender, EventArgs e)
         {
-            if (drawTest1.map.SelectedType == 3 )
+            if (drawTest1.map.SelectedType == TypeSelection.START)
                 txtStartMap.Text = $"{drawTest1.map.CurrentCol}, {drawTest1.map.CurrentRow}";
-            if (drawTest1.map.SelectedType == 4)
+            if (drawTest1.map.SelectedType == TypeSelection.END)
                 txtEndMap.Text = $"{drawTest1.map.CurrentCol}, {drawTest1.map.CurrentRow}";
         }
 
@@ -113,12 +114,19 @@ namespace MapEditorWinform
 
         private void button6_Click(object sender, EventArgs e)
         {
+            drawTest1.AddEnemies(10);
             drawTest1.gameState = 1;
+            
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
             drawTest1.gameState = 0;
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            drawTest1.selectedType(TypeSelection.TURRET);
         }
     }
 }

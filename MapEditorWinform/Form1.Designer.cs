@@ -54,13 +54,16 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.drawTest1 = new MapEditorWinform.DrawTest();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.button8 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -131,14 +134,14 @@
             this.groupBox2.Controls.Add(this.listBox1);
             this.groupBox2.Location = new System.Drawing.Point(12, 133);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(217, 178);
+            this.groupBox2.Size = new System.Drawing.Size(217, 121);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Tile";
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(138, 131);
+            this.button3.Location = new System.Drawing.Point(136, 92);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 3;
@@ -148,7 +151,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(56, 131);
+            this.button2.Location = new System.Drawing.Point(56, 92);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 2;
@@ -174,7 +177,7 @@
             "Type 2"});
             this.listBox1.Location = new System.Drawing.Point(56, 30);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(155, 95);
+            this.listBox1.Size = new System.Drawing.Size(155, 56);
             this.listBox1.TabIndex = 0;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
@@ -187,9 +190,9 @@
             this.groupBox3.Controls.Add(this.button4);
             this.groupBox3.Controls.Add(this.txtStartMap);
             this.groupBox3.Controls.Add(this.label4);
-            this.groupBox3.Location = new System.Drawing.Point(12, 317);
+            this.groupBox3.Location = new System.Drawing.Point(12, 260);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(211, 102);
+            this.groupBox3.Size = new System.Drawing.Size(211, 79);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Mapa";
@@ -316,22 +319,12 @@
             // 
             this.groupBox4.Controls.Add(this.button7);
             this.groupBox4.Controls.Add(this.button6);
-            this.groupBox4.Location = new System.Drawing.Point(13, 426);
+            this.groupBox4.Location = new System.Drawing.Point(12, 345);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(200, 100);
+            this.groupBox4.Size = new System.Drawing.Size(200, 80);
             this.groupBox4.TabIndex = 5;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Juego";
-            // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(12, 20);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(75, 23);
-            this.button6.TabIndex = 0;
-            this.button6.Text = "Start";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button7
             // 
@@ -343,11 +336,42 @@
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(12, 20);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(75, 23);
+            this.button6.TabIndex = 0;
+            this.button6.Text = "Start";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.button8);
+            this.groupBox5.Location = new System.Drawing.Point(13, 432);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(200, 89);
+            this.groupBox5.TabIndex = 6;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Torretas";
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(12, 20);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(75, 23);
+            this.button8.TabIndex = 0;
+            this.button8.Text = "Basica";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1003, 533);
+            this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -367,6 +391,7 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.groupBox4.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -402,6 +427,8 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Button button8;
     }
 }
 

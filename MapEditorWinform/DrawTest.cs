@@ -1,4 +1,5 @@
 ﻿using MapEditorWinform.Enemies;
+using MapEditorWinform.Turrets;
 using MapEditorWinform.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -7,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace MapEditorWinform
@@ -21,7 +23,8 @@ namespace MapEditorWinform
     {
         Camera camera;
 
-        public Texture2D nonType, type1, type2, cursor, start, end, dot, enemyTexture, enemyLifeBar;
+        Texture2D nonType, type1, type2, cursor, start, end, dot, enemyTexture, enemyLifeBar;
+        Texture2D turretBase, turretCannon, turretBullet;
 
         // Solo debe aceptar los clicks cuando el raton está sobre el componente
         public bool isMouseOver = false;
@@ -29,9 +32,23 @@ namespace MapEditorWinform
         SpriteFont sf;
         Vector2 mouseCenter;
 
+        struct MapIndex
+        {
+            public int col, row;
+        }
+
+        // Lista de torretas
+        List<Turret> torretas = new List<Turret>();
+        List<MapIndex> indices = new List<MapIndex>();
+        Dictionary<int, Texture2D> textureListTower = new Dictionary<int, Texture2D>();
+
+        // Lista de enemigos
+        List<Enemy> enemigos = new List<Enemy>();
         
+
         Enemy enemy;
-        public int gameState = 0; 
+        public int gameState = 0;
+        int enemiesToAdd = 0;
 
         // Editor de mapas
         public MapManager map;
@@ -61,9 +78,16 @@ namespace MapEditorWinform
 
         // cambia el seleccionador del editor de mapa
         // el seleccionador crea una vista previa del tipo seleccionado
+        private int SelectedTypeOnMap = 0;
         public void selectedType(int selectedType)
         {
             map.SelectedType = selectedType;
+            SelectedTypeOnMap = selectedType;
+        }
+
+        public int getSelectedType()
+        {
+            return SelectedTypeOnMap;
         }
 
 
@@ -83,6 +107,10 @@ namespace MapEditorWinform
             enemyTexture = Editor.Content.Load<Texture2D>("EnemiTest");
             enemyLifeBar = Editor.Content.Load<Texture2D>("lifeBar");
 
+            turretBase = Editor.Content.Load<Texture2D>("TowerBase");
+            turretBullet = Editor.Content.Load<Texture2D>("TowerBullet");
+            turretCannon = Editor.Content.Load<Texture2D>("TowerCanon");
+
 
             // crea una textura de 3x3 de color blanco
             dot = new Texture2D(GraphicsDevice, 3, 3);
@@ -101,6 +129,7 @@ namespace MapEditorWinform
             // para obtener un item de un diccionario se llama según la llave
             // dict[_Llave_]
             Dictionary<string, Texture2D> dict = new Dictionary<string, Texture2D>();
+            
 
             dict.Add("nonType", nonType);
             dict.Add("type1", type1);
@@ -108,14 +137,34 @@ namespace MapEditorWinform
             dict.Add("start", start);
             dict.Add("end", end);
             dict.Add("dot", dot);
-            
+
+
+            textureListTower.Add(0, turretBase);
+            textureListTower.Add(1, turretCannon);
+            textureListTower.Add(2, turretBullet);
+
+
+
+
             map = new MapManager(10, 10, dict, callback);
+        }
+
+
+        public void AddEnemies(int count)
+        {
+            enemiesToAdd = count;
         }
 
         // obtiene la posicion del ratón, la convierte a posiciones reales de la pantalla
         public Vector2 getMousePos()
         {
             return Vector2.Transform(Mouse.GetState().Position.ToVector2(), Matrix.Invert(camera.Transform));
+        }
+
+        public bool isMouseBounds()
+        {
+            return (getMousePos().X >= 0 && getMousePos().Y >= 0);
+
         }
 
         public void updateMapMgr()
@@ -125,34 +174,92 @@ namespace MapEditorWinform
             map.CurrentCol = (int)mouseCenter.X / 100;
             map.CurrentRow = (int)mouseCenter.Y / 100;
 
-
             mouseCenter.X -= 50;
             mouseCenter.Y -= 50;
+            mouseCenter -= new Vector2(50, 50);
 
-            MouseState currentMS = Mouse.GetState();
+
+
 
 
             // Cuando se haga click izquierdo y el ratón esté sobre el componente agrega un elemento al mapa 
             // segun el tipo seleccionado
-            if (currentMS.LeftButton == ButtonState.Pressed && isMouseOver)
+            MouseState currentMS = Mouse.GetState();
+            if (currentMS.LeftButton == ButtonState.Pressed && isMouseBounds() && getSelectedType() != TypeSelection.TURRET)
             {
                 map.addTo();
             }
+            else if(currentMS.LeftButton == ButtonState.Pressed && isMouseBounds() && getSelectedType() == TypeSelection.TURRET)
+            {
+                addTurret();
+            }
+            
         }
+
+        public void addTurret()
+        {
+            if (map.CurrentCol < 0 || map.CurrentRow < 0)
+                return;
+
+            MapIndex mI = new MapIndex();
+            mI.col = map.CurrentCol;
+            mI.row = map.CurrentRow;
+
+            if (indices.Contains(mI))
+                return;
+
+            Turret t = new Turret(textureListTower, mI.col, mI.row, 100, 35, 2, sf);
+            torretas.Add(t);
+
+        }
+
+        float ream = 100;
+        int idEnemy = 0;
 
         protected override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
             camera.UpdateCamera(GraphicsDevice.Viewport);
+
+            if(enemiesToAdd >0)
+            {
+                ream -= gameTime.ElapsedGameTime.Milliseconds;
+                if(ream < 0)
+                {
+                    enemigos.Add(new Enemy(enemyTexture, enemyLifeBar, new Vector2(100, 100), pointsinmap: map.pathPointLines, ID: idEnemy));
+                    idEnemy++;
+                    ream = 100;
+                    enemiesToAdd--;
+                }
+            }
+
+
+
+            if (gameState == 1 )
+            {
+                enemigos.ForEach(x => x.Update(gameTime));
+                torretas.ForEach(x => x.Update(gameTime, enemigos));
+                removeEnemies();
+            }
+
+
+           
+            //if(gameState != 1)
             updateMapMgr();
 
-
-            
-            if(gameState == 1)
-                enemy.Update();
+        }
 
 
-
+        private void removeEnemies()
+        {
+            for (int i = 0; i < enemigos.Count; i++)
+            {
+                if(enemigos[i].Visible == false)
+                {
+                    enemigos.RemoveAt(i);
+                    i--;
+                }
+            }
         }
 
         /// <summary>
@@ -182,11 +289,23 @@ namespace MapEditorWinform
 
 
             if (gameState == 1)
-                enemy.Draw(Editor.spriteBatch);
+                enemigos.ForEach(x => x.Draw(Editor.spriteBatch));
+
+            torretas.ForEach(x => x.Draw(Editor.spriteBatch));
+
+            if (getSelectedType() == TypeSelection.TURRET)
+            {
+                Vector2 position = getMousePos();
+                // base de la torreta
+                Editor.spriteBatch.Draw(textureListTower[0], position -= new Vector2(50, 50), Color.White);
+
+                // cañon de la torreta
+                Editor.spriteBatch.Draw(textureListTower[1], position += new Vector2(50, 50), rotation: 0, color: Color.White * .5f, origin: new Vector2(50, 50));
+            }
 
             //Editor.spriteBatch.Draw(cursor, getMousePos(), Color.White);
 
-            //Editor.spriteBatch.DrawString(sf, $"C: {currentCol}, R:{currentRow}", mouseCenter, Color.Red);
+            Editor.spriteBatch.DrawString(sf, $"C: {getMousePos().X}, R:{getMousePos().Y}", new Vector2(30,30), Color.Red);
 
             Editor.spriteBatch.End();
             

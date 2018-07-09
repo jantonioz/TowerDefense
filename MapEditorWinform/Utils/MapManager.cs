@@ -203,24 +203,24 @@ namespace MapEditorWinform.Utils
                 // Según el tipo seleccionado cambiar los valores del arreglo Tile
                 switch (SelectedType)
                 {
-                    case 0:
+                    case TypeSelection.VOID:
                         tiles[CurrentCol, CurrentRow] = new Tile(new Vector2(CurrentCol, CurrentRow), textSelection, 0);
                         break;
 
-                    case 1:
+                    case TypeSelection.GRASS:
                         tiles[CurrentCol, CurrentRow] = new Tile(new Vector2(CurrentCol, CurrentRow), textSelection, 1, "Grass");
                         break;
 
-                    case 2:
+                    case TypeSelection.TERRAIN:
                         tiles[CurrentCol, CurrentRow] = new Tile(new Vector2(CurrentCol, CurrentRow), textSelection, 2, "Terrain");
                         break;
-                    case 3:
+                    case TypeSelection.START:
                         setStartMap(CurrentCol, CurrentRow);
                         break;
-                    case 4:
+                    case TypeSelection.END:
                         setEndMap(CurrentCol, CurrentRow);
                         break;
-
+                        
                 }
 
             }
@@ -347,7 +347,12 @@ namespace MapEditorWinform.Utils
             }
         }
 
-
+        public void DrawLine(SpriteBatch sp, Vector2 start, Vector2 end, Color color)
+        {
+            float length = (end - start).Length();
+            float rotation = (float)Math.Atan2(end.Y - start.Y, end.X - start.X);
+            sp.Draw(this.dot, start, null, color, rotation, Vector2.Zero, new Vector2(length, 1), SpriteEffects.None, 0);
+        }
 
         public void Draw(SpriteBatch sp, Vector2 mouseCenter)
         {
@@ -356,23 +361,20 @@ namespace MapEditorWinform.Utils
                 t.Draw(sp);
             }
 
-            if (SelectedType != 0)
+            if (SelectedType != 0 && SelectedType < 4)
             {
                 sp.Draw(
                     (SelectedType == 1 ? texturas["type1"] :
                     (SelectedType == 2 ? texturas["type2"] :
-                    (SelectedType == 3 ? texturas["start"] :
-                    (SelectedType == 4 ? texturas["end"] : null)))), mouseCenter, Color.White * 0.7f);
+                    (SelectedType == 3 ? texturas["start"] : texturas["end"] ))), mouseCenter, Color.White * 0.7f);
                 sp.Draw(texturas["nonType"], mouseCenter, Color.Red);
             }
 
-            if (pathPositions != null)
-            {
-                foreach (Vector2 v in pathPointLines)
-                {
-                    sp.Draw(dot, v, Color.White);
-                }
-            }
+            if (pathPositions == null)
+                return;
+
+            foreach (Vector2 v in pathPointLines)
+                sp.Draw(dot, v, Color.White);
         }
     }
 }

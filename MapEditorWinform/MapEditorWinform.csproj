@@ -72,11 +72,14 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Turrets\Bullet.cs" />
+    <Compile Include="Turrets\Turret.cs" />
     <Compile Include="Utils\Camera.cs" />
     <Compile Include="Utils\MapManager.cs" />
     <Compile Include="Utils\Calculus.cs" />
     <Compile Include="Utils\Path.cs" />
     <Compile Include="Utils\Tile.cs" />
+    <Compile Include="Utils\TypeSelection.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
