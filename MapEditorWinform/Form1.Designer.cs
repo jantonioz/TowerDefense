@@ -52,12 +52,15 @@
             this.guardarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.guardarToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.drawTest1 = new MapEditorWinform.DrawTest();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.button7 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.button8 = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
+            this.drawTest1 = new MapEditorWinform.DrawTest();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -68,6 +71,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button9);
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.textBox2);
             this.groupBox1.Controls.Add(this.label2);
@@ -304,19 +308,10 @@
             this.openFileDialog1.FileName = "openFileDialog1";
             this.openFileDialog1.InitialDirectory = "../";
             // 
-            // drawTest1
-            // 
-            this.drawTest1.Location = new System.Drawing.Point(236, 12);
-            this.drawTest1.Name = "drawTest1";
-            this.drawTest1.Size = new System.Drawing.Size(755, 509);
-            this.drawTest1.TabIndex = 0;
-            this.drawTest1.Text = "drawTest1";
-            this.drawTest1.Click += new System.EventHandler(this.drawTest1_Click);
-            this.drawTest1.MouseLeave += new System.EventHandler(this.drawTest1_MouseLeave);
-            this.drawTest1.MouseHover += new System.EventHandler(this.drawTest1_MouseHover);
-            // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.label6);
+            this.groupBox4.Controls.Add(this.textBox3);
             this.groupBox4.Controls.Add(this.button7);
             this.groupBox4.Controls.Add(this.button6);
             this.groupBox4.Location = new System.Drawing.Point(12, 345);
@@ -366,6 +361,44 @@
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(10, 71);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(107, 23);
+            this.button9.TabIndex = 5;
+            this.button9.Text = "Random Gen Map";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
+            // drawTest1
+            // 
+            this.drawTest1.Location = new System.Drawing.Point(236, 12);
+            this.drawTest1.Name = "drawTest1";
+            this.drawTest1.Size = new System.Drawing.Size(755, 509);
+            this.drawTest1.TabIndex = 0;
+            this.drawTest1.Text = "drawTest1";
+            this.drawTest1.Click += new System.EventHandler(this.drawTest1_Click);
+            this.drawTest1.MouseLeave += new System.EventHandler(this.drawTest1_MouseLeave);
+            this.drawTest1.MouseHover += new System.EventHandler(this.drawTest1_MouseHover);
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(125, 33);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(69, 20);
+            this.textBox3.TabIndex = 2;
+            this.textBox3.Text = "10";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(123, 16);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(69, 13);
+            this.label6.TabIndex = 3;
+            this.label6.Text = "Enemy count";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -391,6 +424,7 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -429,6 +463,9 @@
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox textBox3;
     }
 }
 

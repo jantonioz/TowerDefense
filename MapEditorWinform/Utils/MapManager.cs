@@ -83,6 +83,11 @@ namespace MapEditorWinform.Utils
             }
         }
 
+        public Vector2 GetSize()
+        {
+            return new Vector2(tiles.GetLength(0), tiles.GetLength(1));
+        }
+
 
         /// <summary>
         /// Hacer una referencia en el mapa donde el camino inicia
@@ -147,33 +152,28 @@ namespace MapEditorWinform.Utils
             // Por cada dos tiles crea una linea entre medio
             for (int i = 0; i < pathPositions.GetLength(0) - 1; i++)
             {
-                int x1 = pathPositions[i, 0] * 100 + 50;
-                int x2 = pathPositions[i + 1, 0] * 100 + 50;
 
-                int y1 = pathPositions[i, 1] * 100 + 50;
-                int y2 = pathPositions[i + 1, 1] * 100 + 50;
+                Vector2 a = new Vector2();
+                a.X = pathPositions[i, 0] * 100 + 50;
+                a.Y = pathPositions[i, 1] * 100 + 50;
 
-                float deltaX = x2 - x1;
-                float deltaY = y2 - y1;
+                Vector2 b = new Vector2();
+                b.X = pathPositions[i + 1, 0] * 100 + 50;
+                b.Y = pathPositions[i + 1, 1] * 100 + 50;
+                
 
-                float angle = (float)Math.Atan2(deltaY, deltaX);
+                Vector2 pos = a, vel = Vector2.Zero;
+                vel = Calculus.velFromPoints(a, b, 4);
 
-
-                // Crea puntos entre cada dos tiles del path, hasta que la distancia entre los puntos 
-                // y el segundo tile sea menor que 1 
-                Vector2 pos = new Vector2(x1, y1), vel = Vector2.Zero;
                 while (true)
                 {
-                    double distance = Math.Sqrt(Math.Pow(x2 - pos.X, 2) + Math.Pow(y2 - pos.Y, 2));
 
-                    if (distance < 1)
+                    // Si la distancia entre el punto acutal al objetivo es menor a 1 
+                    // entonces se termina el ciclo
+                    if (Calculus.distanceFromPoints(pos, b) < 1)
                         break;
 
                     pathPointLines.Add(pos);
-
-                    // por cada punto avanza segun el angulo
-                    vel.X = 4f * (float)Math.Cos(angle);
-                    vel.Y = 4f * (float)Math.Sin(angle);
                     pos += vel;
                 }
 
@@ -188,7 +188,7 @@ namespace MapEditorWinform.Utils
         public void addTo()
         {
             if (CurrentCol >= 0 && CurrentRow >= 0 &&
-                CurrentCol < tiles.GetLength(0) && CurrentRow < tiles.GetLength(1))
+                CurrentCol < GetSize().X && CurrentRow < GetSize().Y)
             {
 
                 int type = SelectedType;
@@ -204,15 +204,15 @@ namespace MapEditorWinform.Utils
                 switch (SelectedType)
                 {
                     case TypeSelection.VOID:
-                        tiles[CurrentCol, CurrentRow] = new Tile(new Vector2(CurrentCol, CurrentRow), textSelection, 0);
+                        tiles[CurrentCol, CurrentRow] = new Tile(positionTile, textSelection, 0);
                         break;
 
                     case TypeSelection.GRASS:
-                        tiles[CurrentCol, CurrentRow] = new Tile(new Vector2(CurrentCol, CurrentRow), textSelection, 1, "Grass");
+                        tiles[CurrentCol, CurrentRow] = new Tile(positionTile, textSelection, 1, "Grass");
                         break;
 
                     case TypeSelection.TERRAIN:
-                        tiles[CurrentCol, CurrentRow] = new Tile(new Vector2(CurrentCol, CurrentRow), textSelection, 2, "Terrain");
+                        tiles[CurrentCol, CurrentRow] = new Tile(positionTile, textSelection, 2, "Terrain");
                         break;
                     case TypeSelection.START:
                         setStartMap(CurrentCol, CurrentRow);
@@ -225,6 +225,68 @@ namespace MapEditorWinform.Utils
 
             }
 
+        }
+
+        /// <summary>
+        /// Añade un tile con el tipo, columna y renglon especificado
+        /// </summary>
+        /// <param name="col">Columna especifica en el mapa</param>
+        /// <param name="row">Renglon especifico en el mapa</param>
+        /// <param name="type">Tipo de tile especifico para el mapa</param>
+        public void addTo(int col, int row, int type)
+        {
+            if (col >= 0 && row >= 0 &&
+                col < tiles.GetLength(0) && row < tiles.GetLength(1))
+            {
+
+                //int type = SelectedType;
+
+                // obtiene el valor de textura según el tipo seleccionado
+                Texture2D textSelection =
+                    (type == 0 ? texturas["nonType"] : (type == 1 ? texturas["type1"] : texturas["type2"]));
+
+                // Indicadores del tile seleccionado
+                Vector2 positionTile = new Vector2(col, row);
+
+                // Según el tipo seleccionado cambiar los valores del arreglo Tile
+                switch (type)
+                {
+                    case TypeSelection.VOID:
+                        tiles[col, row] = new Tile(positionTile, textSelection, 0);
+                        break;
+
+                    case TypeSelection.GRASS:
+                        tiles[col, row] = new Tile(positionTile, textSelection, 1, "Grass");
+                        break;
+
+                    case TypeSelection.TERRAIN:
+                        tiles[col, row] = new Tile(positionTile, textSelection, 2, "Terrain");
+                        break;
+
+                    case TypeSelection.START:
+                        setStartMap(col, row);
+                        break;
+                    case TypeSelection.END:
+                        setEndMap(col, row);
+                        break;
+
+                }
+
+            }
+
+        }
+
+        public void randomGen()
+        {
+            Random r = new Random();
+            for (int i = 0; i < tiles.GetLength(0) * tiles.GetLength(1); i++)
+            {
+                int col = i % tiles.GetLength(0);
+                int row = i / tiles.GetLength(0);
+               
+                int x = r.Next(1,3);
+                addTo(col, row, x);
+            }
         }
 
         /// <summary>

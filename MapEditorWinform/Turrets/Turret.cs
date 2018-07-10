@@ -100,8 +100,23 @@ namespace MapEditorWinform.Turrets
             if (currentEnemy == null)
                 return;
 
-            float angle = (float)Calculus.angleFrom(centerRealPosition, currentEnemy.CenterPosition);
-            rotation = angle + rotationOffSet;
+            calculateAngle();
+
+        }
+
+        float targetAngle = 0;
+        float currentAngle = 0;
+
+        public void calculateAngle()
+        {
+
+            targetAngle = (float)Calculus.angleFrom(centerRealPosition, currentEnemy.CenterPosition) ;
+
+            currentAngle = currentAngle <= targetAngle + (float)Calculus.DegreeToRadian(2) ? currentAngle + (float)Calculus.DegreeToRadian(3) : currentAngle - (float)Calculus.DegreeToRadian(3);
+
+            rotation = currentAngle + rotationOffSet;
+
+            //rotation = targetAngle + rotationOffSet;
         }
 
         public void Update(GameTime gameTime, List<Enemy> enemies)
@@ -137,10 +152,15 @@ namespace MapEditorWinform.Turrets
                 return TotalTimeToShoot;
 
 
-            bullets.Add(new Bullet(textureList[2], centerRealPosition, currentEnemy.ID));
+            double maxAngle = currentAngle + Calculus.DegreeToRadian(15);
+            double minAngle = currentAngle - Calculus.DegreeToRadian(15);
 
+            if( targetAngle > minAngle && targetAngle < maxAngle)
+            {
+                bullets.Add(new Bullet(textureList[2], centerRealPosition, currentEnemy.ID));
 
-
+            }
+            
             return TotalTimeToShoot;
         }
 

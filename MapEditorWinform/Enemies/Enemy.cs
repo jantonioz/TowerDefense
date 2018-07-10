@@ -85,7 +85,7 @@ namespace MapEditorWinform.Enemies
                 indexPointsList++;
             this.positionCenter = PointsInMap[indexPointsList];
 
-            if (indexPointsList >= PointsInMap.Count)
+            if (indexPointsList >= PointsInMap.Count-1)
                 Visible = false;
 
 

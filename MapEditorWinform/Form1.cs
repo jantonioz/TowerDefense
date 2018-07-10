@@ -114,7 +114,7 @@ namespace MapEditorWinform
 
         private void button6_Click(object sender, EventArgs e)
         {
-            drawTest1.AddEnemies(10);
+            drawTest1.AddEnemies(Int32.Parse(textBox3.Text));
             drawTest1.gameState = 1;
             
         }
@@ -127,6 +127,11 @@ namespace MapEditorWinform
         private void button8_Click(object sender, EventArgs e)
         {
             drawTest1.selectedType(TypeSelection.TURRET);
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            drawTest1.map.randomGen();
         }
     }
 }

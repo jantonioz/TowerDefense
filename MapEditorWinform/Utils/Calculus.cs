@@ -60,5 +60,7 @@ namespace MapEditorWinform.Utils
             double angle = Math.Atan2(deltaY, deltaX);
             return angle;
         }
+        
+
     }
 }
