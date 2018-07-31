@@ -74,7 +74,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Turrets\Bullet.cs" />
     <Compile Include="Turrets\Turret.cs" />
+    <Compile Include="Utils\Angle.cs" />
     <Compile Include="Utils\Camera.cs" />
+    <Compile Include="Utils\HUD.cs" />
+    <Compile Include="Utils\Input.cs" />
     <Compile Include="Utils\MapManager.cs" />
     <Compile Include="Utils\Calculus.cs" />
     <Compile Include="Utils\Path.cs" />
@@ -119,6 +122,11 @@
     <EmbeddedResource Include="Content\Tile.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <None Include="Content\lineRange.xnb" />
+    <None Include="Content\Range.xnb" />
+    <None Include="Content\TowerBase.xnb" />
+    <None Include="Content\towerBullet.xnb" />
+    <None Include="Content\TowerCanon.xnb" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button9 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -53,14 +54,14 @@
             this.guardarToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.textBox3 = new System.Windows.Forms.TextBox();
             this.button7 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.button8 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
             this.drawTest1 = new MapEditorWinform.DrawTest();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
+            this.button10 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -83,6 +84,16 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Propiedades";
+            // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(10, 71);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(107, 23);
+            this.button9.TabIndex = 5;
+            this.button9.Text = "Random Gen Map";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // button1
             // 
@@ -276,7 +287,7 @@
             this.archivoToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1003, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1263, 24);
             this.menuStrip1.TabIndex = 4;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -321,6 +332,23 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Juego";
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(123, 16);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(69, 13);
+            this.label6.TabIndex = 3;
+            this.label6.Text = "Enemy count";
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(125, 33);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(69, 20);
+            this.textBox3.TabIndex = 2;
+            this.textBox3.Text = "10";
+            // 
             // button7
             // 
             this.button7.Location = new System.Drawing.Point(12, 50);
@@ -343,6 +371,7 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.button10);
             this.groupBox5.Controls.Add(this.button8);
             this.groupBox5.Location = new System.Drawing.Point(13, 432);
             this.groupBox5.Name = "groupBox5";
@@ -361,49 +390,33 @@
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
-            // button9
-            // 
-            this.button9.Location = new System.Drawing.Point(10, 71);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(107, 23);
-            this.button9.TabIndex = 5;
-            this.button9.Text = "Random Gen Map";
-            this.button9.UseVisualStyleBackColor = true;
-            this.button9.Click += new System.EventHandler(this.button9_Click);
-            // 
             // drawTest1
             // 
             this.drawTest1.Location = new System.Drawing.Point(236, 12);
+            this.drawTest1.Margin = new System.Windows.Forms.Padding(3, 3, 5, 5);
             this.drawTest1.Name = "drawTest1";
-            this.drawTest1.Size = new System.Drawing.Size(755, 509);
+            this.drawTest1.Size = new System.Drawing.Size(1013, 509);
             this.drawTest1.TabIndex = 0;
             this.drawTest1.Text = "drawTest1";
             this.drawTest1.Click += new System.EventHandler(this.drawTest1_Click);
             this.drawTest1.MouseLeave += new System.EventHandler(this.drawTest1_MouseLeave);
             this.drawTest1.MouseHover += new System.EventHandler(this.drawTest1_MouseHover);
             // 
-            // textBox3
+            // button10
             // 
-            this.textBox3.Location = new System.Drawing.Point(125, 33);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(69, 20);
-            this.textBox3.TabIndex = 2;
-            this.textBox3.Text = "10";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(123, 16);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(69, 13);
-            this.label6.TabIndex = 3;
-            this.label6.Text = "Enemy count";
+            this.button10.Location = new System.Drawing.Point(94, 19);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(75, 23);
+            this.button10.TabIndex = 1;
+            this.button10.Text = "Clear";
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1003, 533);
+            this.ClientSize = new System.Drawing.Size(1263, 533);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
@@ -415,6 +428,8 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.ResizeEnd += new System.EventHandler(this.Form1_ResizeEnd);
+            this.Resize += new System.EventHandler(this.Form1_Resize);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -466,6 +481,7 @@
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Button button10;
     }
 }
 

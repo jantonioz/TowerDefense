@@ -423,14 +423,17 @@ namespace MapEditorWinform.Utils
                 t.Draw(sp);
             }
 
-            if (SelectedType != 0 && SelectedType < 4)
+            if (SelectedType != 0 && SelectedType <= 4)
             {
                 sp.Draw(
                     (SelectedType == 1 ? texturas["type1"] :
                     (SelectedType == 2 ? texturas["type2"] :
                     (SelectedType == 3 ? texturas["start"] : texturas["end"] ))), mouseCenter, Color.White * 0.7f);
-                sp.Draw(texturas["nonType"], mouseCenter, Color.Red);
+                sp.Draw(texturas["selector"], mouseCenter - new Vector2(5, 5), Color.White );
             }
+            if(SelectedType == 0)
+                sp.Draw(texturas["selector"], mouseCenter - new Vector2(5, 5), Color.White);
+
 
             if (pathPositions == null)
                 return;

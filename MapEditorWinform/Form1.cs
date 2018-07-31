@@ -14,10 +14,13 @@ namespace MapEditorWinform
 {
     public partial class Form1 : Form
     {
+        int lastW, lastH;
         public Form1()
         {
             InitializeComponent();
             openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();
+            lastW = this.Width;
+            lastH = this.Height;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -72,7 +75,8 @@ namespace MapEditorWinform
 
         private void button4_Click(object sender, EventArgs e)
         {
-            drawTest1.map.SelectedType = TypeSelection.START;
+            drawTest1.selectedType(TypeSelection.START);
+            
         }
 
         private void drawTest1_MouseLeave(object sender, EventArgs e)
@@ -83,7 +87,7 @@ namespace MapEditorWinform
 
         private void button5_Click(object sender, EventArgs e)
         {
-            drawTest1.map.SelectedType = TypeSelection.END;
+            drawTest1.selectedType(TypeSelection.END);
         }
 
         private void drawTest1_Click(object sender, EventArgs e)
@@ -133,5 +137,30 @@ namespace MapEditorWinform
         {
             drawTest1.map.randomGen();
         }
+
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            int difX = this.Width - lastW;
+            int difY = this.Height - lastH;
+            lastW = this.Width;
+            lastH = this.Height;
+            drawTest1.Width += difX;
+            drawTest1.Height += difY;
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            drawTest1.removeAllturrets();
+        }
+
+        private void Form1_ResizeEnd(object sender, EventArgs e)
+        {
+            int difX = this.Width - lastW;
+            int difY = this.Height - lastH;
+            lastW = this.Width;
+            lastH = this.Height;
+            drawTest1.Width += difX;
+            drawTest1.Height += difY;
+        } 
     }
 }

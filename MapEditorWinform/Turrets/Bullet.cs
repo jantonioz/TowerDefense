@@ -31,7 +31,7 @@ namespace MapEditorWinform.Turrets
         public void Update(Vector2? target)
         {
 
-            Position += Calculus.velFromPoints(Position, target?? Position, 6);
+            Position += Calculus.velFromPoints(Position, target?? Position, 10);
             CenterPosition = Position - new Vector2(textura.Width / 2, textura.Height / 2);
             rect = new Rectangle((int)Position.X, (int)Position.Y, textura.Width, textura.Height);
 

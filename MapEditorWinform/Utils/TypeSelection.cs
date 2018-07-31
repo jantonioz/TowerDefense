@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MapEditorWinform.Utils
 {
-    static class TypeSelection
+    public static class TypeSelection
     {
         public const int VOID       = 0;
         public const int GRASS      = 1;

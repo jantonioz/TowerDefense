@@ -15,16 +15,22 @@ namespace MapEditorWinform
 {
 
     public delegate void MapManagerCallbackEvent(string notice, bool value);
-
-
+    
     // la clase DrawTest extiende de MonoGame.Forms.Controls.UpdateWindow
     // Encapsula el juego en un componente de windows forms
     public class DrawTest : MonoGame.Forms.Controls.UpdateWindow
     {
+
+
         Camera camera;
 
-        Texture2D nonType, type1, type2, cursor, start, end, dot, enemyTexture, enemyLifeBar;
-        Texture2D turretBase, turretCannon, turretBullet;
+        Texture2D nonType, selector, type1, type2, cursor, start, end, hud, dot, enemyTexture, enemyLifeBar;
+        Texture2D turretBase, turretCannon, turretBullet, lineRange, range;
+
+        // HUD
+        Dictionary<int, Texture2D> listHUD = new Dictionary<int, Texture2D>();
+        HUD Hud;
+
 
         // Solo debe aceptar los clicks cuando el raton está sobre el componente
         public bool isMouseOver = false;
@@ -56,9 +62,13 @@ namespace MapEditorWinform
         //Disparador de eventos
         MapManagerCallbackEvent callback;
 
+        GraphicsDevice graphicsDevice;
+
         protected override void Initialize()
         {
             base.Initialize();
+
+            graphicsDevice = this.GraphicsDevice;
 
             // inicializa la camara con los graficos de la pantalla actual
             camera = new Camera(GraphicsDevice.Viewport);
@@ -71,8 +81,9 @@ namespace MapEditorWinform
 
             // crea un enemigo [TEST]
             enemy = new Enemy(enemyTexture, enemyLifeBar, new Vector2(100, 100));
-            
 
+            // HUD
+            Hud = new HUD(listHUD);
         }
 
 
@@ -83,6 +94,7 @@ namespace MapEditorWinform
         {
             map.SelectedType = selectedType;
             SelectedTypeOnMap = selectedType;
+            Hud.typeSelection = selectedType;
         }
 
         public int getSelectedType()
@@ -98,8 +110,13 @@ namespace MapEditorWinform
         {
             cursor = Editor.Content.Load<Texture2D>("cursor");
             nonType = Editor.Content.Load<Texture2D>("Tile");
+            selector = Editor.Content.Load<Texture2D>("Selector");
             type1 = Editor.Content.Load<Texture2D>("DarkGrass");
             type2 = Editor.Content.Load<Texture2D>("Terrain");
+            hud = Editor.Content.Load<Texture2D>("HUD");
+
+            
+
 
             start = Editor.Content.Load<Texture2D>("MapEditorStart");
             end = Editor.Content.Load<Texture2D>("MapEditorEnd");
@@ -110,6 +127,9 @@ namespace MapEditorWinform
             turretBase = Editor.Content.Load<Texture2D>("TowerBase");
             turretBullet = Editor.Content.Load<Texture2D>("TowerBullet");
             turretCannon = Editor.Content.Load<Texture2D>("TowerCanon");
+            lineRange = Editor.Content.Load<Texture2D>("lineRange");
+            range = Editor.Content.Load<Texture2D>("Range");
+
 
 
             // crea una textura de 3x3 de color blanco
@@ -132,6 +152,7 @@ namespace MapEditorWinform
             
 
             dict.Add("nonType", nonType);
+            dict.Add("selector", selector);
             dict.Add("type1", type1);
             dict.Add("type2", type2);
             dict.Add("start", start);
@@ -142,6 +163,17 @@ namespace MapEditorWinform
             textureListTower.Add(0, turretBase);
             textureListTower.Add(1, turretCannon);
             textureListTower.Add(2, turretBullet);
+            textureListTower.Add(3, range);
+            textureListTower.Add(4, lineRange);
+
+
+            listHUD.Add(0, hud);
+            listHUD.Add(1, nonType);
+            listHUD.Add(2, type1);
+            listHUD.Add(3, type2);
+            listHUD.Add(4, start);
+            listHUD.Add(5, end);
+            listHUD.Add(6, selector);
 
 
 
@@ -149,6 +181,11 @@ namespace MapEditorWinform
             map = new MapManager(10, 10, dict, callback);
         }
 
+        internal void removeAllturrets()
+        {
+            torretas.Clear();
+            indices.Clear();
+        }
 
         public void AddEnemies(int count)
         {
@@ -164,7 +201,6 @@ namespace MapEditorWinform
         public bool isMouseBounds()
         {
             return (getMousePos().X >= 0 && getMousePos().Y >= 0);
-
         }
 
         public void updateMapMgr()
@@ -208,8 +244,9 @@ namespace MapEditorWinform
             if (indices.Contains(mI))
                 return;
 
-            Turret t = new Turret(textureListTower, mI.col, mI.row, 100, 35, 2, sf);
+            Turret t = new Turret(textureListTower, mI.col, mI.row, 300, 35, 2, sf);
             torretas.Add(t);
+            indices.Add(mI);
 
         }
 
@@ -242,9 +279,11 @@ namespace MapEditorWinform
                 removeEnemies();
             }
 
+            Hud.Update(graphicsDevice.Viewport.Width, graphicsDevice.Viewport.Height);
+            if (Hud.typeSelection != -1)
+                this.selectedType(Hud.typeSelection);
 
            
-            //if(gameState != 1)
             updateMapMgr();
 
         }
@@ -267,7 +306,6 @@ namespace MapEditorWinform
         /// </summary>
         /// <param name="notice">Mensaje del evento</param>
         /// <param name="value">Afirmación o negacion del mensaje</param>
-
         public void hasNotice(string notice, bool value)
         {
             if(notice.Contains("end") && value == true)
@@ -282,6 +320,7 @@ namespace MapEditorWinform
         {
             base.Draw();
             GraphicsDevice.Clear(Color.CornflowerBlue);
+
             Editor.spriteBatch.Begin(transformMatrix: camera.Transform);
 
 
@@ -303,12 +342,14 @@ namespace MapEditorWinform
                 Editor.spriteBatch.Draw(textureListTower[1], position += new Vector2(50, 50), rotation: 0, color: Color.White * .5f, origin: new Vector2(50, 50));
             }
 
-            //Editor.spriteBatch.Draw(cursor, getMousePos(), Color.White);
+            
+            Editor.spriteBatch.End();
 
-            Editor.spriteBatch.DrawString(sf, $"C: {getMousePos().X}, R:{getMousePos().Y}", new Vector2(30,30), Color.Red);
+            Editor.spriteBatch.Begin();
+
+            Hud.Draw(Editor.spriteBatch);
 
             Editor.spriteBatch.End();
-            
         }
     }
 }

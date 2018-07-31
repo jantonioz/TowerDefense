@@ -16,5 +16,9 @@
     <File>C:/Users/josea/source/repos/ToweDefense/ToweDefense/Content/Turret/TowerBase.png</File>
     <File>C:/Users/josea/source/repos/ToweDefense/ToweDefense/Content/Turret/towerBullet.png</File>
     <File>C:/Users/josea/source/repos/ToweDefense/ToweDefense/Content/Turret/TowerCanon.png</File>
+    <File>C:/Users/josea/source/repos/ToweDefense/ToweDefense/Content/Turret/lineRange.png</File>
+    <File>C:/Users/josea/source/repos/ToweDefense/ToweDefense/Content/Turret/Range.png</File>
+    <File>C:/Users/josea/source/repos/ToweDefense/ToweDefense/Content/Selector.png</File>
+    <File>C:/Users/josea/source/repos/ToweDefense/ToweDefense/Content/HUD.png</File>
   </SourceFiles>
 </SourceFileCollection>
